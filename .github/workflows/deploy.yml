@@ -1,0 +1,38 @@
+name: Deploy Jekyll Site
+
+on:
+  push:
+    branches:
+      - main  # Запускать сборку при пуше в ветку main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Клонирование репозитория
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Шаг 2: Установка Ruby
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0  # Укажи актуальную версию Ruby для Jekyll
+
+      # Шаг 3: Установка зависимостей
+      - name: Install dependencies
+        run: |
+          bundle install
+
+      # Шаг 4: Сборка сайта
+      - name: Build Jekyll site
+        run: |
+          bundle exec jekyll build
+
+      # Шаг 5: Деплой на GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./my-resume/_site  # Укажи директорию, куда Jekyll создает сайт
