@@ -18,21 +18,29 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0  # Укажи актуальную версию Ruby для Jekyll
+          ruby-version: 3.0
 
-      # Шаг 3: Установка зависимостей
+      # Шаг 3: Переход в папку my-resume
+      - name: Change directory
+        working-directory: ./my-resume
+        run: |
+          echo "Working in my-resume directory"
+
+      # Шаг 4: Установка зависимостей
       - name: Install dependencies
         run: |
           bundle install
+        working-directory: ./my-resume
 
-      # Шаг 4: Сборка сайта
+      # Шаг 5: Сборка сайта
       - name: Build Jekyll site
         run: |
           bundle exec jekyll build
+        working-directory: ./my-resume
 
-      # Шаг 5: Деплой на GitHub Pages
+      # Шаг 6: Деплой на GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./my-resume/_site  # Укажи директорию, куда Jekyll создает сайт
+          publish_dir: ./my-resume/_site
