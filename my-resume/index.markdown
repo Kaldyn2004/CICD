@@ -7,7 +7,7 @@ title: Резюме Кропотов Кирилл
 **Frontend разработчик**
 
 📞 **Телефон**: +7 (919) 418-81-68  
-✉️ **Email**: kirillkropotov2017@gmail.com
+✉️ **Email**: kirillkropotov2018@gmail.com
 
 ---
 
